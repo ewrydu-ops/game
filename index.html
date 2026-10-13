@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101812">
+  <title>Змейка — ещё один укус</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game">
+    <header><span class="eyebrow">МИНИ-АРКАДА / 01</span><span class="badge"><i></i> Просто играй</span></header>
+    <section class="heading"><div><h1>Змейка<span>.</span></h1><p>Ещё один укус. Ещё один рекорд.</p></div><div class="scores"><div><span>СЧЁТ</span><strong id="score">0</strong></div><div><span>РЕКОРД</span><strong id="best">0</strong></div></div></section>
+    <div class="board-wrap">
+      <canvas id="board" width="600" height="600" aria-label="Поле игры Змейка"></canvas>
+      <div id="overlay" class="overlay"><div class="overlay-card"><span id="symbol" class="symbol">↗</span><h2 id="message">Начнём?</h2><p id="hint">Собирай яблоки и не врезайся.</p><button id="play">Играть <span>→</span></button></div></div>
+    </div>
+    <div class="toolbar"><span id="status" role="status" aria-live="polite">Готова к первому укусу</span><button id="pause" class="secondary" disabled>Пауза <span>Ⅱ</span></button></div>
+    <div class="controls"><p><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd><span> или WASD — движение</span></p><p><kbd>Пробел</kbd><span> — пауза</span></p></div>
+    <div class="touch-controls" aria-label="Управление направлением"><button data-direction="up" aria-label="Вверх">↑</button><div><button data-direction="left" aria-label="Влево">←</button><button data-direction="down" aria-label="Вниз">↓</button><button data-direction="right" aria-label="Вправо">→</button></div></div>
+    <footer>Маленькая игра. Большой аппетит.<span>Без спешки — до первого яблока.</span></footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

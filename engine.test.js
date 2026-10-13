@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {SIZE,createGame,placeFood,turn,tick} from './engine.js';
+test('movement preserves length and forbids reversal',()=>{const g=createGame();turn(g,'left');tick(g);assert.deepEqual(g.snake[0],{x:9,y:10});assert.equal(g.snake.length,3);});
+test('eating increases score and respawns food outside snake',()=>{const g=createGame();g.food={x:9,y:10};tick(g,()=>0);assert.equal(g.score,1);assert.equal(g.snake.length,4);assert.ok(!g.snake.some(p=>p.x===g.food.x&&p.y===g.food.y));});
+test('wall collision ends game',()=>{const g=createGame();g.snake=[{x:SIZE-1,y:0}];tick(g);assert.equal(g.state,'over');});
+test('self collision ends game',()=>{const g=createGame();g.snake=[{x:2,y:2},{x:3,y:2},{x:3,y:3},{x:2,y:3}];tick(g);assert.equal(g.state,'over');});
+test('moving onto vacating tail is legal',()=>{const g=createGame();g.snake=[{x:2,y:2},{x:2,y:3},{x:3,y:3},{x:3,y:2}];g.food={x:9,y:9};tick(g);assert.equal(g.state,'playing');});
+test('multiple inputs cannot reverse direction within one tick',()=>{const g=createGame();turn(g,'up');turn(g,'left');tick(g);assert.deepEqual(g.snake[0],{x:8,y:9});});
+test('paused game does not advance',()=>{const g=createGame();g.state='paused';const before=structuredClone(g);tick(g);assert.deepEqual(g,before);});
+test('food generation handles a full board',()=>{const snake=[];for(let y=0;y<SIZE;y++)for(let x=0;x<SIZE;x++)snake.push({x,y});assert.equal(placeFood(snake),null);});
